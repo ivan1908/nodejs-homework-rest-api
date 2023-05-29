@@ -8,6 +8,7 @@ const {
   validateBody,
   isValidId,
   validateStatusBody,
+  authentication,
 } = require('../../middlewares');
 
 const { schemas } = require('../../models/contact');
@@ -22,6 +23,7 @@ router.delete('/:contactId', isValidId, ctrl.deleteById);
 
 router.put(
   '/:contactId',
+  authentication,
   isValidId,
   validateBody(schemas.addSchema),
   ctrl.updateById
@@ -29,6 +31,7 @@ router.put(
 
 router.patch(
   '/:contactId/favorite',
+  authentication,
   isValidId,
   validateStatusBody(schemas.updateFavoriteSchema),
   ctrl.updateStatusContact
